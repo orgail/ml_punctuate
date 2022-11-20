@@ -25,4 +25,4 @@ SbertPuncCase - модель восстановления пунктуации �
 
 ## Запуск приложения:
 
-streamlit run path_to_file/streamlit_punctuate.py
+streamlit run https://github.com/orgail/ml_punctuate/blob/main/streamlit_punctuate.py
