@@ -17,10 +17,9 @@ text_to_punctuate = st.text_area("Вставьте сюда текст на ру
 text_to_punctuate = text_to_punctuate.lower()
 text_to_punctuate = text_to_punctuate.translate(str.maketrans('', '', string.punctuation))
 
-# Преобразуем текст, проводя его через модель
-text_punctuated =  model.punctuate(text_to_punctuate)
+def text_punctuated(text_to_punctuate):
+    """Преобразуем текст, проводя его через модель"""
+    return model.punctuate(text_to_punctuate)
 
 # Пишем в браузере преобразованный текст, 
-st.text_area("Преобразованный текст. Его можно выделить и скопировать.", value=text_punctuated, disabled=False)
-
-
+st.text_area("Преобразованный текст. Его можно выделить и скопировать.", value=text_punctuated(text_to_punctuate), disabled=False)
