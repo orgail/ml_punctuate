@@ -34,3 +34,7 @@ streamlit run https://github.com/orgail/ml_punctuate/blob/main/streamlit_punctua
 Денис Самаркин
 Роман Николаенко
 Дмитрий Иванов
+
+
+_________________________________________
+Примечание, код теперь соответствует стандарту PET 8.
