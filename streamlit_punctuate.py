@@ -19,7 +19,7 @@ input_text = st.text_area("Вставьте сюда текст на русск�
 # преобразуем в нижний регистр и уберём знаки препинания.
 # ! Была изменена переменная text_to_punctuate на lowercase_text 
 # ! Причины изменения можно посмотреть выше. 
-lowercase_text = text_to_punctuate.lower()
+lowercase_text = input_text.lower()
 text_to_punctuate = lowercase_text.translate(str.maketrans('', '', string.punctuation))
 
 
