@@ -1,6 +1,13 @@
 import streamlit as st
 from sbert_punc_case_ru import SbertPuncCase
+from langdetect import detect
 import string
+
+
+def text_punctuated(text_to_punctuate):
+    """Преобразуем текст, проводя его через модель"""
+    return model.punctuate(text_to_punctuate)
+
 
 # Создаём объект - модель для преобразования текста
 model = SbertPuncCase()
@@ -12,29 +19,27 @@ st.subheader(
 )
 
 # Забираем текст, введённый пользователем в браузере
-# ! Была изменена переменная text_to_punctuate на input_text
-# ! для возможности проверки введённого пользователем текста в целях отладки приложения.
 input_text = st.text_area(
     "Вставьте сюда текст на русском языке, например - однако на улице прекрасная погода",
     value="",
 )
 
+# Проверяем, введен ли какой-нибудь текст.
+# Если текст введен, определяем, на каком языке написан введенный текст с помощью
+# библиотеки langdetect.
+# Если текст не русский, выдаем сообщение об ошибке.
+# Если текст русский:
 # обработаем текст, на случай, если пользователь ввёл не по правилам -
 # преобразуем в нижний регистр и уберём знаки препинания.
-# ! Была изменена переменная text_to_punctuate на lowercase_text
-# ! Причины изменения можно посмотреть выше.
-lowercase_text = input_text.lower()
-text_to_punctuate = lowercase_text.translate(str.maketrans("", "", string.punctuation))
-
-
-def text_punctuated(text_to_punctuate):
-    """Преобразуем текст, проводя его через модель"""
-    return model.punctuate(text_to_punctuate)
-
-
-# Пишем в браузере преобразованный текст,
-st.text_area(
-    "Преобразованный текст. Его можно выделить и скопировать.",
-    value=text_punctuated(text_to_punctuate),
-    disabled=False,
-)
+# Пишем в браузере преобразованный текст.
+if len(input_text) > 0:
+    detected_text = detect(input_text)
+    if detected_text != 'ru':
+        st.error("Язык введенного текста не русский! Попробуйте ввести текст еще раз.")
+    else:
+        lowercase_text = input_text.lower()
+        text_to_punctuate = lowercase_text.translate(str.maketrans('', '',
+                                                                   string.punctuation))
+        st.text_area("Преобразованный текст. Его можно выделить и скопировать.",
+                         value=text_punctuated(text_to_punctuate),
+                         disabled=False)
