@@ -26,8 +26,8 @@ def lang_detection(input_text):
         if detected_text != 'ru':
             st.error("Язык введенного текста не русский! Попробуйте ввести \
                 текст еще раз.")
-            return "Язык введенного текста не русский! Попробуйте ввести \
-                текст еще раз."
+            return "Язык введенного текста не русский! " + \
+                "Попробуйте ввести текст еще раз."
         else:
             lowercase_text = input_text.lower()
             text_to_punctuate = lowercase_text.translate(str.maketrans('', '',
